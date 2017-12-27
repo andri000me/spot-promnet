@@ -22,27 +22,36 @@ class Login extends CI_Controller{
       if($this->ModelLogin->check_admin($username,$password) == TRUE)
       {
         $data = array('username'  => $username,
+                      'role'  => 'admin',
                       'login'     => TRUE);
         $this->session->set_userdata($data);
-        redirect('Admin');
+        redirect('Index');
       }else if($this->ModelLogin->check_guru($username,$password) == TRUE)
       {
         $data = array('username'  => $username,
+                      'role'  => 'guru',
                       'login'     => TRUE);
         $this->session->set_userdata($data);
-        redirect('Guru');
+        redirect('Index');
       }else if($this->ModelLogin->check_siswa($username,$password) == TRUE)
       {
         $data = array('username'  => $username,
+                      'role'  => 'siswa',
                       'login'     => TRUE);
         $this->session->set_userdata($data);
-        redirect('Siswa');
+        redirect('Index');
       }else{
         $data['title'] = 'Halaman Login';
         $data['message'] = "Username atau password salah";
         $this->load->view('login_form', $data);
       }
     }
+  }
+
+  public function prosesLogout()
+  {
+    $this->session->sess_destroy();
+    redirect('Index','refresh');
   }
 
 }

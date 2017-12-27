@@ -11,21 +11,21 @@ class Index extends CI_Controller{
 
   public function index()
   {
-    if($this->session->userdata('admin') == TRUE) {
+    if($this->session->userdata('role') == 'admin' && $this->session->userdata('login') == TRUE) {
 			$data['title'] = 'Halaman Admin';
-			$data['username'] = $this->session->userdata('admin');
+			$data['username'] = $this->session->userdata('username');
 
-			$this->load->view('halaman_admin');
-		}else if($this->session->userdata('guru') == TRUE) {
+			$this->load->view('dashboard_admin', $data);
+		}else if($this->session->userdata('role') == 'guru' && $this->session->userdata('login') == TRUE) {
 			$data['title'] = 'Halaman Guru';
-			$data['username'] = $this->session->userdata('guru');
+			$data['username'] = $this->session->userdata('username');
 
-			$this->load->view('halaman_guru');
-		}else if($this->session->userdata('siswa') == TRUE) {
+			$this->load->view('halaman_guru', $data);
+		}else if($this->session->userdata('role') == 'siswa' && $this->session->userdata('login') == TRUE) {
 			$data['title'] = 'Halaman Siswa';
-			$data['username'] = $this->session->userdata('siswa');
+			$data['username'] = $this->session->userdata('username');
 
-			$this->load->view('halaman_siswa');
+			$this->load->view('halaman_siswa', $data);
 		}else{
 			$data['title'] = 'Halaman Login';
 			$this->load->view('login_form', $data);

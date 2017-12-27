@@ -80,6 +80,11 @@ body {
 .nav-pills .nav-link {
   color: #28a745;
 }
+
+.nav-item.logout input {
+  color: #fff;
+  cursor: pointer;
+}
 .nav-pills .nav-link.active, .show>.nav-pills .nav-link {
     color: #fff;
     background-color: #28a745!important;
