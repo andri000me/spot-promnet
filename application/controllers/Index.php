@@ -12,22 +12,22 @@ class Index extends CI_Controller{
   public function index()
   {
     if($this->session->userdata('role') == 'admin' && $this->session->userdata('login') == TRUE) {
-			$data['title'] = 'Halaman Admin';
+			$data['title'] = 'SPOT | Dashboard Admin';
 			$data['username'] = $this->session->userdata('username');
 
 			$this->load->view('dashboard_admin', $data);
 		}else if($this->session->userdata('role') == 'guru' && $this->session->userdata('login') == TRUE) {
-			$data['title'] = 'Halaman Guru';
+			$data['title'] = 'SPOT | Dashboard Guru';
 			$data['username'] = $this->session->userdata('username');
 
 			$this->load->view('halaman_guru', $data);
 		}else if($this->session->userdata('role') == 'siswa' && $this->session->userdata('login') == TRUE) {
-			$data['title'] = 'Halaman Siswa';
+			$data['title'] = 'SPOT | Dashboard Siswa';
 			$data['username'] = $this->session->userdata('username');
 
 			$this->load->view('halaman_siswa', $data);
 		}else{
-			$data['title'] = 'Halaman Login';
+			$data['title'] = 'SPOT | Halaman Login';
 			$this->load->view('login_form', $data);
 		}
   }

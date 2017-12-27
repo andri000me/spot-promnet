@@ -41,7 +41,7 @@ class Login extends CI_Controller{
         $this->session->set_userdata($data);
         redirect('Index');
       }else{
-        $data['title'] = 'Halaman Login';
+        $data['title'] = 'SPOT | Halaman Login';
         $data['message'] = "Username atau password salah";
         $this->load->view('login_form', $data);
       }
