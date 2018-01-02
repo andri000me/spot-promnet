@@ -9,10 +9,10 @@
           <a class='nav-link' href='<?php echo base_url(); ?>index.php/Index'>BERANDA</a>
         </li>
         <li class="nav-item">
-          <a class='nav-link active' href='<?php echo base_url(); ?>index.php/Admin/halamanGuru'>GURU</a>
+          <a class='nav-link' href='<?php echo base_url(); ?>index.php/Admin/halamanGuru'>GURU</a>
         </li>
         <li class="nav-item">
-          <a class='nav-link' href='<?php echo base_url(); ?>index.php/Admin/halamanSiswa'>SISWA</a>
+          <a class='nav-link active' href='<?php echo base_url(); ?>index.php/Admin/halamanSiswa'>SISWA</a>
         </li>
         <li class="nav-item">
           <a class='nav-link' href='<?php echo base_url(); ?>index.php/Admin/halamanAkun'>AKUN</a>
@@ -30,10 +30,10 @@
 <div class="container" id="menu-top">
   <div class="row">
     <div class="col-md-11">
-      <h4>Data Guru</h4>
+      <h4>Data Siswa</h4>
     </div>
     <div class="col-md-1">
-      <a href="<?php echo base_url(); ?>index.php/Admin/halamanTambahGuru" class="btn btn-success">Tambah</a>
+      <a href="<?php echo base_url(); ?>index.php/Admin/halamanTambahSiswa" class="btn btn-success">Tambah</a>
     </div>
   </div>
 </div>

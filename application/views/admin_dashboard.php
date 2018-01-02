@@ -23,7 +23,8 @@
       </ul>
     </nav>
     <div class="logo">
-      <img src="<?php echo base_url(); ?>assets/img/logo-diskes.png" alt="Kemenkes Logo">
+      <!-- <img src="<?php echo base_url(); ?>assets/img/logo-diskes.png"> -->
+      <h1>SPOT</h1>
     </div>
   </div>
 <div class="container">
@@ -35,11 +36,10 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">Selamat datang, <?php echo $username; ?></h5>
-          <p class="card-text">Proses distribusi pekerja tidak tetap akan dilakukan secara otomatis.</p>
-          <a href="index.php?menu=distribusi_process" class="btn btn-lg btn-success mt-4 mb-4">DISTRIBUSI</a>
+
         </div>
         <div class="card-footer text-muted">
-          2017 &copy; Dinas Kesehatan. All rights reserved
+          2018 &copy; SPOT. All rights reserved
         </div>
       </div>
     </div>

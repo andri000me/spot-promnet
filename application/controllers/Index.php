@@ -15,17 +15,17 @@ class Index extends CI_Controller{
 			$data['title'] = 'SPOT | Dashboard Admin';
 			$data['username'] = $this->session->userdata('username');
 
-			$this->load->view('dashboard_admin', $data);
+			$this->load->view('admin_dashboard', $data);
 		}else if($this->session->userdata('role') == 'guru' && $this->session->userdata('login') == TRUE) {
 			$data['title'] = 'SPOT | Dashboard Guru';
 			$data['username'] = $this->session->userdata('username');
 
-			$this->load->view('halaman_guru', $data);
+			$this->load->view('guru_dashboard', $data);
 		}else if($this->session->userdata('role') == 'siswa' && $this->session->userdata('login') == TRUE) {
 			$data['title'] = 'SPOT | Dashboard Siswa';
 			$data['username'] = $this->session->userdata('username');
 
-			$this->load->view('halaman_siswa', $data);
+			$this->load->view('siswa_dashboard', $data);
 		}else{
 			$data['title'] = 'SPOT | Halaman Login';
 			$this->load->view('login_form', $data);
