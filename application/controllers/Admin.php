@@ -394,5 +394,11 @@ class Admin extends CI_Controller{
 		}
 	}
 
+  public function halaman404()
+  {
+    $data['title'] = "SPOT | Halaman tidak ditemukan";
+    $this->load->view('404', $data);
+  }
+
 
 }
