@@ -54,7 +54,10 @@ class Guru extends CI_Controller{
     foreach ($query as $guru) {
       $idGuru =  $guru['idGuru'];
     }
-
+    $query = $this->ModelGuru->TampilDataMapel();
+    $data['mapel'] = $query->result_array();
+    $query = $this->ModelGuru->LihatGuru($id);
+    $data['guru'] = $query->result_array();
     $query = $this->ModelGuru->TampilMateri($idGuru);
     $data['materi'] = $query->result_array();
 
@@ -103,6 +106,7 @@ class Guru extends CI_Controller{
   public function prosesTambahMateri()
   {
     $deskripsi = $this->input->post('deskripsi');
+    $judul = $this->input->post('judul');
     $id = $this->input->post('id');
     $config['upload_path'] = './assets/uploads';
     $config['allowed_types'] = 'pdf';
@@ -122,18 +126,18 @@ class Guru extends CI_Controller{
     foreach ($query as $guru) {
       $idGuru =  $guru['idGuru'];
     }
-    $this->get_uri_image($deskripsi,$idGuru);
+    $this->get_uri_image($deskripsi,$idGuru,$judul);
     $this->halamanMateri();
   }
 
-  public function get_uri_image($deskripsi,$idGuru)
+  public function get_uri_image($deskripsi,$idGuru,$judul)
   {
     $filename = $this->ModelGuru->fetch_document(FCPATH.'assets/uploads');
     foreach ($filename as $row) {
       $insertData = array(
         'idMateri'=>null,
         'idGuru'=>$idGuru,
-        'judulFile'=>$row,
+        'judulFile'=>$judul,
         'deskripsi'=>$deskripsi,
   			'lokasiFile'=>'assets/uploads/'.$row
   		);

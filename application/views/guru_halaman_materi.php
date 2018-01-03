@@ -30,13 +30,41 @@
 </div>
 <div class="container header">
   <div class="row">
-      <div class="col-6 pt-4">
+    <div class="col-6 pt-4">
+        <?php
+        foreach($guru as $dataGuru){
+          ?>
+          <div class="form-group row">
+            <label for="Mapel" class="col-sm-3 col-form-label">Mata Pelajaran</label>
+            <div class="col-sm-9">
+              <?php
+                foreach ($mapel as $dataMapel) {
+                  if ($dataMapel['idMapel'] == $dataGuru['idMapel']) {
+                    $ampuMapel = $dataMapel['idMapel'];
+                    echo "<input type='text'  class='form-control' value='$dataMapel[namaMapel]' disabled>";
+                    echo "<input type='hidden' name='idMapel' class='form-control' value='$dataMapel[idMapel]'>";
+                  }
+                }
+              ?>
+            </div>
+          </div>
+          <?php
+        } ?>
       <?php echo form_open_multipart('Guru/prosesTambahMateri'); ?>
       <input type="hidden" name="id" value="<?php echo $username; ?>">
         <div class="form-group row">
           <label for="materi" class="col-sm-3 col-form-label">Materi</label>
           <div class="col-sm-9">
             <?php echo form_upload('userfile'); ?>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-6 pt-4">
+        <div class="form-group row">
+          <label for="judul" class="col-sm-3 col-form-label">Judul Materi</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="judul" id="judul" required>
           </div>
         </div>
         <div class="form-group row">
@@ -46,7 +74,7 @@
           </div>
         </div>
       </div>
-      <div class="col-7 text-right">
+      <div class="col-12 text-right">
         <?php echo form_submit('submit','Tambah','name="tambah" class="btn btn-info"'); ?>
         <a href="<?php echo base_url(); ?>index.php/Guru/halamanMateri" class="btn btn-secondary">Kembali</a>
       </div>
@@ -59,7 +87,7 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Judul File</th>
+          <th>Judul Materi</th>
           <th>Deskripsi</th>
           <th>Lokasi File</th>
           <th>Aksi</th>
@@ -76,7 +104,7 @@
           <td><?php echo $dataMateri['judulFile'] ?></td>
           <td><?php echo $dataMateri['deskripsi'] ?></td>
           <td><?php echo $dataMateri['lokasiFile'] ?></td>
-          <td id="body-table"><a class="btn btn-info btn-sm" href="<?php echo base_url().$dataMateri['lokasiFile'] ?>">Lihat</a> <a class="btn btn-danger btn-sm" href="hapusMateri/<?php echo $dataMateri['idMateri']; ?>">Hapus</a>
+          <td id="body-table"><a class="btn btn-info btn-sm" href="<?php echo base_url().$dataMateri['lokasiFile'] ?>">Lihat</a> <a class="btn btn-danger btn-sm" href="hapusMateri/<?php echo $dataMateri['idMateri']; ?>">Hapus</a></td>
         </tr>
         <?php
             }
