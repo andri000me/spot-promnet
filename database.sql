@@ -60,8 +60,10 @@ create table nilai (
   idNilai integer(10) auto_increment primary key,
   idSiswa integer(10) not null,
   idGuru integer(10) not null,
+  idKelas integer(10) not null,
   jenis varchar(10) not null,
   nilai integer(4) not null,
   constraint fk_idSiswa foreign key (idSiswa) references siswa(idSiswa) on delete cascade,
-  constraint fk_idGuru1 foreign key (idGuru) references guru(idGuru) on delete cascade
+  constraint fk_idGuru1 foreign key (idGuru) references guru(idGuru) on delete cascade,
+  constraint fk_idKelas3 foreign key (idKelas) references kelas(idKelas) on delete cascade
 );

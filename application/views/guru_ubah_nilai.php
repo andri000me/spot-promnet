@@ -27,27 +27,26 @@
     <div class="col-12 pb-2">
       <h4>Tambah Materi </h4>
     </div>
+      <?php
+        foreach ($nilai as $data) {
+      ?>
       <div class="col-6 pt-4">
-      <?php echo form_open_multipart('Guru/prosesTambahMateri'); ?>
-      <input type="hidden" name="id" value="<?php echo $username; ?>">
-        <div class="form-group row">
-          <label for="materi" class="col-sm-3 col-form-label">Materi</label>
-          <div class="col-sm-9">
-            <?php echo form_upload('userfile'); ?>
-          </div>
+      <?php echo form_open_multipart('Guru/prosesUbahNilai'); ?>
+      <input type="hidden" name="id" value="<?php echo $data['idNilai']?>">
+      <div class="form-group row">
+        <label for="Nilai" class="col-sm-3 col-form-label">Nilai</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="nilai" id="Nilai" value="<?php echo $data['nilai']?>" required>
         </div>
-        <div class="form-group row">
-          <label for="deskripsi" class="col-sm-3 col-form-label">Deskripsi</label>
-          <div class="col-sm-9">
-            <textarea name="deskripsi" class="form-control"rows="3"></textarea>
-          </div>
-        </div>
+      </div>
       </div>
       <div class="col-7 text-right">
-        <?php echo form_submit('submit','Tambah','name="tambah" class="btn btn-info"'); ?>
-        <a href="<?php echo base_url(); ?>index.php/Guru/halamanMateri" class="btn btn-secondary">Kembali</a>
+        <?php echo form_submit('submit','Ubah','name="ubah" class="btn btn-info"'); ?>
+        <a href="<?php echo base_url(); ?>index.php/Guru/halamanNilai" class="btn btn-secondary">Kembali</a>
       </div>
-    <?php echo form_close(); ?>
+    <?php echo form_close();
+      }
+    ?>
   </div>
 </div>
 

@@ -13,6 +13,9 @@
           <a class='nav-link active' href='<?php echo base_url(); ?>index.php/Admin/halamanSiswa'>SISWA</a>
         </li>
         <li class="nav-item">
+          <a class='nav-link' href='<?php echo base_url(); ?>index.php/Admin/halamanKontrak'>KONTRAK</a>
+        </li>
+        <li class="nav-item">
           <a class='nav-link' href='<?php echo base_url(); ?>index.php/Admin/halamanAkun'>AKUN</a>
         </li>
         <li class="nav-item logout">
@@ -21,8 +24,7 @@
       </ul>
     </nav>
     <div class="logo">
-      <!-- <img src="<?php echo base_url(); ?>assets/img/logo-diskes.png"> -->
-      <h1>SPOT</h1>
+      <img src="<?php echo base_url(); ?>assets/img/title.png">
     </div>
   </div>
 <div class="container">
@@ -77,7 +79,7 @@
 
       </div>
       <div class="col-12 text-right">
-        <?php echo form_submit('submit','Ubah',' class="btn btn-success"'); ?>
+        <?php echo form_submit('submit','Ubah',' class="btn btn-info"'); ?>
         <a href="<?php echo base_url(); ?>index.php/Admin/halamanSiswa" class="btn btn-secondary">Kembali</a>
       </div>
     <?php echo form_close();

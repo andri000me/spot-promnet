@@ -78,7 +78,7 @@ body {
   }
 }
 .nav-pills .nav-link {
-  color: #28a745;
+  color: #343a40;
 }
 
 .nav-item.logout input {
@@ -87,7 +87,7 @@ body {
 }
 .nav-pills .nav-link.active, .show>.nav-pills .nav-link {
     color: #fff;
-    background-color: #28a745!important;
+    background-color: #343a40!important;
 }
 .ttd {
   display: none;

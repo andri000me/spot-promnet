@@ -20,8 +20,7 @@
       </ul>
     </nav>
     <div class="logo">
-      <!-- <img src="<?php echo base_url(); ?>assets/img/logo-diskes.png"> -->
-      <h1>SPOT</h1>
+      <img src="<?php echo base_url(); ?>assets/img/title.png">
     </div>
   </div>
 <div class="container">

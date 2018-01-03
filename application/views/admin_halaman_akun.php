@@ -15,6 +15,9 @@
           <a class='nav-link' href='<?php echo base_url(); ?>index.php/Admin/halamanSiswa'>SISWA</a>
         </li>
         <li class="nav-item">
+          <a class='nav-link' href='<?php echo base_url(); ?>index.php/Admin/halamanKontrak'>KONTRAK</a>
+        </li>
+        <li class="nav-item">
           <a class='nav-link active' href='<?php echo base_url(); ?>index.php/Admin/halamanAkun'>AKUN</a>
         </li>
         <li class="nav-item logout">
@@ -23,8 +26,7 @@
       </ul>
     </nav>
     <div class="logo">
-      <!-- <img src="<?php echo base_url(); ?>assets/img/logo-diskes.png"> -->
-      <h1>SPOT</h1>
+      <img src="<?php echo base_url(); ?>assets/img/title.png">
     </div>
   </div>
 <div class="container" id="menu-top">
@@ -49,7 +51,7 @@
             <tr>
               <td><?php echo $dataGuru['NIP'] ?></td>
               <td><?php echo $dataGuru['password'] ?></td>
-              <td id="body-table"><a class="btn btn-success btn-sm" href="halamanUbahPasswordGuru/<?php echo $dataGuru['idGuru']; ?>">Ubah</a>
+              <td id="body-table"><a class="btn btn-info btn-sm" href="halamanUbahPasswordGuru/<?php echo $dataGuru['idGuru']; ?>">Ubah</a>
             </tr>
             <?php
               }
@@ -78,7 +80,7 @@
             <tr>
               <td><?php echo $dataSiswa['NIS'] ?></td>
               <td><?php echo $dataSiswa['password'] ?></td>
-              <td id="body-table"><a class="btn btn-success btn-sm" href="halamanUbahPasswordSiswa/<?php echo $dataSiswa['idSiswa']; ?>">Ubah</a>
+              <td id="body-table"><a class="btn btn-info btn-sm" href="halamanUbahPasswordSiswa/<?php echo $dataSiswa['idSiswa']; ?>">Ubah</a>
             </tr>
             <?php
               }

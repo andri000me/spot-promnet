@@ -14,93 +14,90 @@ class Guru extends CI_Controller{
 
   }
 
+  public function halamanUbahNilai($id)
+  {
+    $data['title'] = "SPOT | Ubah Nilai";
+    $query = $this->ModelGuru->TampilNilai($id);
+		$data['nilai'] = $query->result_array();
+    $this->load->view('guru_ubah_nilai', $data);
+  }
+
+  public function prosesUbahNilai()
+	{
+    $id = $this->input->post('id');
+		$this->form_validation->set_rules('nilai','Nilai','required');
+
+		if($this->form_validation->run() === TRUE)
+		{
+      $insertData = array(
+				'nilai'=>$this->input->post('nilai')
+			);
+			$this->ModelGuru->UbahNilai($insertData,$id);
+			redirect('Guru/halamanNilai');
+		} else {
+			$this->load->view('guru_ubah_nilai');
+		}
+	}
+
+  public function hapusNilai($id)
+  {
+    $this->ModelGuru->HapusNilai($id);
+    redirect('Guru/halamanNilai');
+  }
+
   public function halamanMateri()
   {
+    $data['title'] = "SPOT | Data Materi";
+    $data['username'] = $this->session->userdata('username');
+    $id = $this->session->userdata('username');
+    $query = $this->ModelGuru->LihatGuru($id)->result_array();
+    foreach ($query as $guru) {
+      $idGuru =  $guru['idGuru'];
+    }
 
-    $limit = 3;
-		$uri_segment = 3;
-		$offset = $this->uri->segment($uri_segment);
-
-		$data_materi = $this->ModelGuru->GetAllMateri($limit,$offset)->result();
-
-    $this->load->library('table');
-    $template = array(
-            'table_open'            => '<table border="0" cellpadding="4" cellspacing="0" id="table" class="table table-striped">',
-
-            'thead_open'            => '<thead>',
-            'thead_close'           => '</thead>',
-
-            'heading_row_start'     => '<tr>',
-            'heading_row_end'       => '</tr>',
-            'heading_cell_start'    => '<th>',
-            'heading_cell_end'      => '</th>',
-
-            'tbody_open'            => '<tbody>',
-            'tbody_close'           => '</tbody>',
-
-            'row_start'             => '<tr>',
-            'row_end'               => '</tr>',
-            'cell_start'            => '<td>',
-            'cell_end'              => '</td>',
-
-            'row_alt_start'         => '<tr>',
-            'row_alt_end'           => '</tr>',
-            'cell_alt_start'        => '<td>',
-            'cell_alt_end'          => '</td>',
-
-            'table_close'           => '</table>'
-    );
-
-    $this->table->set_template($template);
-		$this->table->set_empty("&nbsp;");
-		$this->table->set_heading("ID","Judul","Deskripsi","Lokasi","Aksi");
-
-		foreach ($data_materi as $materi) {
-			$this->table->add_row(
-				$materi->idMateri,
-				$materi->judulFile,
-				$materi->deskripsi,
-				$materi->lokasiFile,
-        anchor(base_url().$materi->lokasiFile,'Lihat','class="btn btn-success btn-sm"')." ".anchor('Guru/halamanHapusMateri/'.$materi->idMateri,'Hapus','class="btn btn-danger btn-sm"')
-			);
-		}
-
-		$numrows = $this->ModelGuru->CountAllMateri();
-
-		$config['base_url'] = base_url().'index.php/Guru/halamanMateri';
-		$config['total_rows'] = $numrows;
-		$config['per_page'] = $limit;
-		$config['uri_segment'] = $uri_segment;
-
-    $config['full_tag_open'] 	= '<div class="pagging text-center"><nav><ul class="pagination">';
-    $config['full_tag_close'] 	= '</ul></nav></div>';
-    $config['num_tag_open'] 	= '<li class="page-item"><span class="page-link">';
-    $config['num_tag_close'] 	= '</span></li>';
-    $config['cur_tag_open'] 	= '<li class="page-item active"><span class="page-link">';
-    $config['cur_tag_close'] 	= '<span class="sr-only">(current)</span></span></li>';
-    $config['next_tag_open'] 	= '<li class="page-item"><span class="page-link">';
-    $config['next_tagl_close'] 	= '<span aria-hidden="true">&raquo;</span></span></li>';
-    $config['prev_tag_open'] 	= '<li class="page-item"><span class="page-link">';
-    $config['prev_tagl_close'] 	= '</span></li>';
-    $config['first_tag_open'] 	= '<li class="page-item"><span class="page-link">';
-    $config['first_tagl_close'] = '</span></li>';
-    $config['last_tag_open'] 	= '<li class="page-item"><span class="page-link">';
-    $config['last_tagl_close'] 	= '</span></li>';
-
-		$this->pagination->initialize($config);
-
-		$data['table'] = $this->table->generate();
-		$data['title'] = 'SPOT | Data Materi';
-		$data['pages'] = $this->pagination->create_links();
+    $query = $this->ModelGuru->TampilMateri($idGuru);
+    $data['materi'] = $query->result_array();
 
 		$this->load->view('guru_halaman_materi', $data);
   }
 
+  public function halamanNilai()
+  {
+    $data['title'] = "SPOT | Kelola Nilai";
+    $id = $this->session->userdata('username');
+    $data['username'] = $id;
+    $query = $this->ModelGuru->LihatNilaiHarian($id);
+		$data['harian'] = $query->result_array();
+
+    $query = $this->ModelGuru->LihatNilaiUlangan($id);
+		$data['ulangan'] = $query->result_array();
+
+    $query = $this->ModelGuru->LihatNilaiUAS($id);
+		$data['uas'] = $query->result_array();
+
+    $query = $this->ModelGuru->TampilDataMapel();
+    $data['mapel'] = $query->result_array();
+
+    $query = $this->ModelGuru->TampilDataKelas();
+    $data['kelas'] = $query->result_array();
+
+
+
+    $query = $this->ModelGuru->TampilDataSiswa($id);
+    $data['siswa'] = $query->result_array();
+
+    $query = $this->ModelGuru->LihatGuru($id);
+    $data['guru'] = $query->result_array();
+
+    $query = $this->ModelGuru->TampilKontrak($id);
+    $data['kontrak'] = $query->result_array();
+
+    $this->load->view('guru_halaman_nilai',$data);
+  }
+
   public function halamanTambahMateri()
   {
-    $data['title'] = "SPOT | Tambah Materi";
-    $data['username'] = $this->session->userdata('username');
-    $this->load->view('guru_tambah_materi',$data);
+
   }
 
   public function prosesTambahMateri()
@@ -143,5 +140,66 @@ class Guru extends CI_Controller{
     }
     $this->ModelGuru->InsertFilename($insertData);
   }
+
+  public function hapusMateri($id)
+  {
+    $this->ModelGuru->HapusMateri($id);
+		redirect('Guru/halamanMateri');
+  }
+
+  public function prosesTambahNilai()
+	{
+    $id = $this->input->post('id');
+    $jenis = $this->input->post('jenis');
+    $query = $this->ModelGuru->LihatGuru($id)->result_array();
+    foreach ($query as $guru) {
+      $idGuru =  $guru['idGuru'];
+    }
+		$this->form_validation->set_rules('idMapel','Mapel','required');
+		$this->form_validation->set_rules('idKelas','Kelas','required');
+		$this->form_validation->set_rules('idSiswa','Nama','required');
+    $this->form_validation->set_rules('nilai','nilai','required');
+
+		if($this->form_validation->run() === TRUE && $this->input->post('idKelas') != 0 && $this->input->post('idSiswa') != 0)
+		{
+      $insertData = array(
+				'idSiswa'=>$this->input->post('idSiswa'),
+				'idGuru'=>$idGuru,
+        'idKelas'=>$this->input->post('idKelas'),
+				'jenis'=>$jenis,
+				'nilai'=>$this->input->post('nilai')
+			);
+			$this->ModelGuru->InsertNilai($insertData);
+			redirect('Guru/halamanNilai');
+		} else {
+      $query = $this->ModelGuru->LihatNilaiHarian($id);
+      $data['harian'] = $query->result_array();
+
+      $query = $this->ModelGuru->LihatNilaiUlangan($id);
+      $data['ulangan'] = $query->result_array();
+
+      $query = $this->ModelGuru->LihatNilaiUAS($id);
+      $data['uas'] = $query->result_array();
+
+      $query = $this->ModelGuru->TampilDataMapel();
+      $data['mapel'] = $query->result_array();
+
+      $query = $this->ModelGuru->TampilDataKelas();
+      $data['kelas'] = $query->result_array();
+
+      $id = $this->session->userdata('username');
+
+      $query = $this->ModelGuru->TampilDataSiswa($id);
+      $data['siswa'] = $query->result_array();
+
+      $query = $this->ModelGuru->LihatGuru($id);
+      $data['guru'] = $query->result_array();
+
+      $query = $this->ModelGuru->TampilKontrak($id);
+      $data['kontrak'] = $query->result_array();
+
+			$this->load->view('guru_halaman_nilai',$data);
+		}
+	}
 
 }

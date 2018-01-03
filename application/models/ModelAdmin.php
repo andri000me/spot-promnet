@@ -3,12 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ModelAdmin extends CI_Model{
 
-  public function __construct()
-  {
-    parent::__construct();
-    //Codeigniter : Write Less Do More
-  }
-
   public function TampilGuru()
   {
     $this->db->select('*');
@@ -17,10 +11,53 @@ class ModelAdmin extends CI_Model{
     return $this->db->get();
   }
 
+  public function TampilSiswa()
+  {
+    $this->db->select('*');
+    $this->db->from('siswa');
+    $this->db->join('kelas', 'kelas.idKelas = siswa.idKelas');
+    return $this->db->get();
+  }
+
+  public function TampilKontrak()
+  {
+    $this->db->select('*');
+    $this->db->from('kontrak');
+    $this->db->join('kelas', 'kelas.idKelas = kontrak.idKelas');
+    $this->db->join('mapel', 'mapel.idMapel = kontrak.idMapel');
+    return $this->db->get();
+  }
+
   public function TampilMapel()
   {
     return $this->db->get('mapel');
   }
+
+  public function TampilKelas()
+  {
+    return $this->db->get('kelas');
+  }
+
+  public function HapusGuru($id)
+  {
+    $this->db->where('idGuru',$id);
+    $this->db->delete('guru');
+  }
+
+  public function HapusSiswa($id)
+  {
+    $this->db->where('idSiswa',$id);
+    $this->db->delete('siswa');
+  }
+
+  public function HapusKontrak($id)
+  {
+    $this->db->where('idKontrak',$id);
+    $this->db->delete('kontrak');
+  }
+
+  /* DIPAKAI========================================================*/
+
 
   public function TampilDataGuru()
   {
@@ -32,12 +69,20 @@ class ModelAdmin extends CI_Model{
     return $this->db->get('siswa');
   }
 
-  public function TampilKelas()
+
+
+
+  public function GetMapel($id)
   {
-    return $this->db->get('kelas');
+    $this->db->where('idMapel',$id);
+    return $this->db->get('mapel');
   }
 
-/* ================================================================ */
+  public function GetKelas($id)
+  {
+    $this->db->where('idKelas',$id);
+    return $this->db->get('kelas');
+  }
 
   public function LihatGuru($id)
   {
@@ -57,11 +102,15 @@ class ModelAdmin extends CI_Model{
     return $this->db->get();
   }
 
-/* ================================================================ */
 
   public function InsertGuru($data)
   {
     $this->db->insert('guru',$data);
+  }
+
+  public function InsertKontrak($data)
+  {
+    $this->db->insert('kontrak',$data);
   }
 
   public function InsertSiswa($data)
@@ -69,7 +118,6 @@ class ModelAdmin extends CI_Model{
     $this->db->insert('siswa',$data);
   }
 
-/* ================================================================ */
 
   public function UbahGuru($data,$id)
   {
@@ -95,19 +143,20 @@ class ModelAdmin extends CI_Model{
     $this->db->update('siswa',$data);
   }
 
-/* ================================================================ */
 
-  public function HapusGuru($id)
+  function check_kontrak($idKelas, $idMapel)
   {
-    $this->db->where('idGuru',$id);
-    $this->db->delete('guru');
+    $query = $this->db->get_where('kontrak', array('idKelas' => $idKelas, 'idMapel' => $idMapel), 1, 0);
+
+    if($query->num_rows() > 0)
+    {
+      return TRUE;
+    }else{
+      return FALSE;
+    }
   }
 
-  public function HapusSiswa($id)
-  {
-    $this->db->where('idSiswa',$id);
-    $this->db->delete('siswa');
-  }
+
 
 
   public function CountAllGuru()
@@ -135,6 +184,21 @@ class ModelAdmin extends CI_Model{
     $this->db->select('*');
     $this->db->from('siswa');
     $this->db->join('kelas', 'kelas.idKelas = siswa.idKelas');
+    return $this->db->get();
+  }
+
+  public function CountAllKontrak()
+  {
+    return $this->db->count_all('kontrak');
+  }
+
+  public function GetAllKontrak($limit, $start)
+  {
+    $this->db->limit($limit, $start);
+    $this->db->select('*');
+    $this->db->from('kontrak');
+    $this->db->join('kelas', 'kelas.idKelas = kontrak.idKelas');
+    $this->db->join('mapel', 'mapel.idMapel = kontrak.idMapel');
     return $this->db->get();
   }
 }

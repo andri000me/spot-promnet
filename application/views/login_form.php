@@ -1,11 +1,12 @@
 <?php $this->load->view('header'); ?>
 
 <div class="container">
+  <div class="logo mt-5 mb-4 text-center">
+    <img src="<?php echo base_url(); ?>assets/img/header.png">
+  </div>
   <?php echo form_open('Login/prosesLogin', 'class="form-signin"');?>
 
-    <div class="logo mt-5 mb-4 text-center">
-      <img src="<?php echo base_url(); ?>assets/img/favicon.png" width="150px">
-    </div>
+
       <?php
         if(isset($message))
         {
@@ -17,7 +18,6 @@
                 </div>";
         }
       ?>
-    <h5 class="form-signin-heading text-center mt-4 mb-3">Login SPOT</h5>
     <label for="inputUsername" class="sr-only">Username</label>
     <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>

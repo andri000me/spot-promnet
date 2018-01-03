@@ -82,11 +82,11 @@ body {
   }
 }
 .nav-pills .nav-link {
-  color: #dc3545;
+  color: #343a40!important;
 }
 .nav-pills .nav-link.active, .show>.nav-pills .nav-link {
     color: #fff;
-    background-color: #dc3545!important;
+    background-color: #343a40!important;
 }
 
 .header-area {
@@ -179,4 +179,8 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.cascade {
+    display: none;
 }
